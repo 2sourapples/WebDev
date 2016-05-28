@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+    <h1>Log in to Animal Browser</h1>
+    {% if state == 'bad' %}{# detect if we need to show the error message #}
+    <p class="error">Invalid user name or password.</p>
+    {% elif state == 'bad-username' %}
+      <p class="error">Invalid username.</p>
+    {% elif state == 'password-mismatch' %}
+      <p class="error">Passwords don't match.</p>
+    {% elif state == 'username-used' %}
+      <p class="error">Username already taken.</p>
+    {% endif %}
+  <div class="pure-g">
+    <form method="POST" action="/login" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-2">
+    <input type="hidden" name="url" value="{{ request.args.url }}">
+    <label for="login-user">Username</label>
+      <input type="text" name="user" id="login-user">
+    <label for="login-password">Password</label>
+      <input type="password" name="password" id="login-password">
+    <button type="submit" class="pure-button pure-button-primary">Log In</button>
+    </form>
+  <form method="POST" action="/create_user" class="pure-form pure-form-stacked pure-u-1 pure-u-md-1-2">
+    <input type="hidden" name="url" value="{{ request.args.url }}">
+    <label for="create-user">Username</label>
+      <input type="text" name="user" id="create-user" maxlength="20">
+    <label for="create-password">Password</label>
+      <input type="password" name="password" id="create-password">
+    <label for="create-password">Confirm Password</label>
+      <input type="password" name="confirm" id="create-confirm">
+    <button type="submit" class="pure-button">Create Account</button>
+    </form>
+  </div>
+{% endblock %}

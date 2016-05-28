@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}{{ animal.name }}{% endblock %}
+{% block content %}
+<h1>{{ animal.name }}</h1>
+<p>The {{ animal.name }} lives in {{ animal.location }}.</p>
+  <p>Created by <a href="{{ url_for('show_user', name=animal.creator.login) }}">{{ animal.creator.login }}</a>.</p>
+{% endblock %}

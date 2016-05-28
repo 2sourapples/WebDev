@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+    Animal Browser
+{% endblock %}
+{% block content %}
+    <h1>Animal Browser</h1>
+    {% if g.user %}
+    <p>You are logged in as {{ g.user.login }} ({{ session.auth_user }}). <a href="/logout">Log Out</a>.</p>
+    {% endif %}
+<p>Select an animal to learn more.</p>
+<ul>
+  {% for animal in animals %}
+    {# Generate a URL for the 'animal' function with the specified animal ID #}
+  <li><a href="{{ url_for('animal', aid=animal.id) }}">{{ animal.name }}</a></li>
+  {% endfor %}
+</ul>
+    <h2>Search Animals</h2>
+    <form action="/search" class="pure-form">
+    <fieldset>
+      <label>Search by name: <input type="text" name="query"></label>
+      <button type="submit" class="pure-button pure-button-primary">Search!</button>
+    </fieldset>
+    </form>
+    {% if session.auth_user %}
+      {# authenticated users can add animals #}
+    <h2>Add New Animal</h2>
+    <form action="/add" method="post" class="pure-form pure-form-stacked">
+    {# include CSRF token as hidden form field - it will be included
+       in POST data. #}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+      <fieldset>
+    <label for="name">Animal name:</label>
+    <input type="text" name="name" id="name">
+    <label for="home">Animal home:</label>
+        <input type="text" name="home" id="home">
+    <button type="submit" class="pure-button pure-button-primary">Add</button>
+        </fieldset>
+    </form>
+    {% else %}
+      {# all others can log in #}
+    <p><a href="/login">Log in</a></p>
+    {% endif %}
+{% endblock %}

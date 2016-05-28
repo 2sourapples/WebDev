@@ -1,0 +1,44 @@
+html {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13pt;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+h2 {
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.error {
+    color: #FF6666;
+}
+
+.pure-button-primary {
+    background-color: rebeccapurple;
+}
+
+.sidebar {
+    box-sizing: border-box;
+    padding-left: 1ex;
+}
+.sidebar h1 {
+    text-align: center;
+}
+
+@media screen and (min-width: 48em) {
+    .sidebar h1 {
+        text-align: left;
+    }
+}
+
+.pure-button.logout {
+    background-color: red;
+    color: white;
+}
+.pure-button.login {
+    background-color: green;
+    color: white;
+}

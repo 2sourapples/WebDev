@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}User {{ user.login }}{% endblock %}
+{% block content %}
+<h1>User {{ user.login }}</h1>
+<h2>Animals</h2>
+  <p>{{ user.login }} has created the following animals:</p>
+
+  <ul>
+  {# loop over animals — possible b/c the relationship has a backref #}
+  {% for animal in user.animals %}
+  <li><a href="{{ url_for('animal', aid=animal.id) }}">{{ animal.name }}</a></li>
+  {%- endfor %}
+  </ul>
+{% endblock %}

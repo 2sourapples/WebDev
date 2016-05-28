@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Title Me{% endblock %}</title>
+  <script type="text/javascript">
+    WebFontConfig = {
+      google: { families: [ 'Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css"
+          media="screen and (min-width: 48em)">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div id="shell" class="pure-g">
+<div id="control-sidebar" class="sidebar pure-u-1 pure-u-md-1-5">
+  <h1><a href="/">Animal Browser</a></h1>
+  {% if g.user %}
+  <div>Logged in as <a href="{{ url_for('show_user', name=g.user.login) }}">{{ g.user.login }}</a>.</div>
+  <a href="/logout?url={{ request.path }}" class="pure-button logout">Log Out</a>
+  {% else %}
+    <a href="/login?url={{ request.path }}" class="pure-button login">Log In</a>
+  {% endif %}
+</div>
+<main id="main" class="main pure-u-1 pure-u-md-4-5">
+{% block content %}
+    Fill me in!
+{% endblock %}
+</main>
+</div>
+</body>
+</html>
